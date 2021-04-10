@@ -1,0 +1,32 @@
+VBox {
+    -fx-alignment: center;
+}
+
+.title-label {
+    -fx-padding: 10pt;
+}
+
+HBox {
+    -fx-alignment: center;
+    -fx-padding: 5;
+}
+
+AnchorPane {
+    -fx-start-margin: 50pt;
+}
+
+.group {
+    -fx-background-color: #d4e4ff;
+    -fx-padding: 2.5pt;
+    -fx-border-insets: 2.5pt;
+    -fx-background-insets: 2.5pt;
+    -fx-background-radius: 5%;
+}
+
+#editButton, #addButton{
+    -fx-background-color: #2afc17;
+}
+
+#removeButton {
+    -fx-background-color: #f23224;
+}

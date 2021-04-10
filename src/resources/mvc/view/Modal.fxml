@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox prefHeight="100" prefWidth="200" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvc.controller.ModalController">
+    <Label text="Введите значение &quot;X&quot;:" />
+    <HBox>
+        <TextField fx:id="addTextField">
+            <HBox.margin>
+                <Insets>
+                    <left>2.5</left>
+                    <right>2.5</right>
+                </Insets>
+            </HBox.margin>
+        </TextField>
+        <Button fx:id="addButton" text="✔" onAction="#addButtonClick" disable="true">
+            <HBox.margin>
+                <Insets>
+                    <left>2.5</left>
+                    <right>2.5</right>
+                </Insets>
+            </HBox.margin>
+        </Button>
+    </HBox>
+</VBox>

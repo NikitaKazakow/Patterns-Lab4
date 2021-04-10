@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<GridPane prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="mvc.controller.MainController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="NEVER"/>
+        <ColumnConstraints hgrow="SOMETIMES"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <VBox prefWidth="165">
+        <Label text="Значения функции" styleClass="title-label"/>
+        <TableView fx:id="table">
+            <columns>
+                <TableColumn text="X" prefWidth="75">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="firstName"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Y" prefWidth="75"/>
+            </columns>
+        </TableView>
+        <VBox styleClass="group">
+            <Label text="Редатирование:">
+                <VBox.margin>
+                    <Insets>
+                        <top>10</top>
+                    </Insets>
+                </VBox.margin>
+            </Label>
+            <HBox>
+                <Label text="X:    "/>
+                <TextField fx:id="editTextField" prefWidth="100"/>
+            </HBox>
+            <HBox>
+                <Button fx:id="removeButton" text="❌" prefWidth="75" disable="true" onAction="#removePoint">
+                    <HBox.margin>
+                        <Insets>
+                            <left>5</left>
+                            <right>2.5</right>
+                            <bottom>5</bottom>
+                        </Insets>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="editButton" text="✔" prefWidth="75" disable="true" onAction="#editPoint">
+                    <HBox.margin>
+                        <Insets>
+                            <left>2.5</left>
+                            <right>5</right>
+                            <bottom>5</bottom>
+                        </Insets>
+                    </HBox.margin>
+                </Button>
+            </HBox>
+            <Button fx:id="addModalButton" text='Добавить "X"' onAction="#addPoint">
+                <VBox.margin>
+                    <Insets>
+                        <bottom>10</bottom>
+                    </Insets>
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </VBox>
+    <VBox GridPane.columnIndex="1">
+        <Label text="График функции" styleClass="title-label"/>
+        <LineChart fx:id="chart" animated="false">
+            <xAxis>
+                <NumberAxis side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT"/>
+            </yAxis>
+        </LineChart>
+    </VBox>
+</GridPane>
