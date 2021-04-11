@@ -1,11 +1,14 @@
 package mvc.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -24,7 +27,7 @@ public class MainController implements Initializable {
     Model model;
 
     @FXML
-    private TableView<Model.Point> table;
+    private TableView<XYChart.Data<Double, Double>> table;
 
     @FXML
     private LineChart<Double, Double> chart;
@@ -91,16 +94,19 @@ public class MainController implements Initializable {
 
         model = new Model();
 
-        chart.setData(model.getChartSeries());
+        ObservableList<XYChart.Series<Double, Double>> series = FXCollections.observableArrayList();
+        series.add(new XYChart.Series<>(model.getPoints()));
 
-        table.setItems(model.getTablePoints());
+        chart.setData(series);
 
-        table.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("x"));
-        table.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("y"));
+        table.setItems(model.getPoints());
+
+        table.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("xValue"));
+        table.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("yValue"));
 
         table.getSelectionModel().selectedItemProperty().addListener((observableValue, point, t1) -> {
             if (t1 != null) {
-                editTextField.setText(t1.getX().toString());
+                editTextField.setText(t1.getXValue().toString());
                 editButton.setDisable(false);
                 removeButton.setDisable(false);
             }

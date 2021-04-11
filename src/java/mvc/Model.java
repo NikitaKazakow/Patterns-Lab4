@@ -1,6 +1,5 @@
 package mvc;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
@@ -11,39 +10,29 @@ import java.util.Comparator;
 @Getter
 public class Model {
 
-    private final ObservableList<Point> tablePoints;
-
-    private final ObservableList<XYChart.Series<Double, Double>> chartSeries;
+    private final ObservableList<XYChart.Data<Double, Double>> points;
 
     public Model() {
 
-        tablePoints = FXCollections.observableArrayList();
-        chartSeries = FXCollections.observableArrayList();
+        points = FXCollections.observableArrayList();
 
-        ObservableList<XYChart.Data<Double, Double>> data = FXCollections.observableArrayList();
         for (double x = -100; x < 101; x++) {
-
-            Point point = new Point(x / 10);
-            tablePoints.add(point);
-
-            data.add(new XYChart.Data<>(x / 10, point.getY()));
+            points.add(new XYChart.Data<>(x / 10, mathFunction(x / 10)));
         }
-
-        chartSeries.add(new XYChart.Series<>(data));
-
     }
 
+    private double mathFunction(double x) {
+        return Math.pow(x, 2);
+    }
+
+    //region Data manipulation methods
     public int addPoint(double x) {
-        Point point = new Point(x);
-
-        tablePoints.add(point);
-        tablePoints.sort(Comparator.comparing(Point::getX));
-
-        chartSeries.get(0).getData().add(new XYChart.Data<>(x, point.getY()));
+        points.add(new XYChart.Data<>(x, mathFunction(x)));
+        points.sort(Comparator.comparing(XYChart.Data::getXValue));
 
         int i = 0;
-        for ( ; i < tablePoints.size(); i++) {
-            if (tablePoints.get(i).getX() == x) {
+        for ( ; i < points.size(); i++) {
+            if (points.get(i).getXValue() == x) {
                 break;
             }
         }
@@ -51,9 +40,8 @@ public class Model {
     }
 
     public int removePoint(int index) {
-        tablePoints.remove(index);
-        chartSeries.get(0).getData().remove(index);
-        if (index == tablePoints.size() - 1) {
+        points.remove(index);
+        if (index == points.size() - 1) {
             return index - 1;
         }
         else {
@@ -65,27 +53,5 @@ public class Model {
         removePoint(index);
         return addPoint(x);
     }
-
-    public static class Point {
-
-        private final SimpleObjectProperty<XYChart.Data<Double, Double>> point;
-
-        protected Point(double x) {
-            this.point = new SimpleObjectProperty<>(
-                    new XYChart.Data<>(x, mathFunction(x))
-            );
-        }
-
-        public Double getX() {
-            return point.get().getXValue();
-        }
-
-        public Double getY() {
-            return point.get().getYValue();
-        }
-
-        private double mathFunction(double x) {
-            return Math.pow(x, 2);
-        }
-    }
+    //endregion
 }
