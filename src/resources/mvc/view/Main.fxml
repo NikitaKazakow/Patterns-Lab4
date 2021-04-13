@@ -6,7 +6,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<GridPane prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+<GridPane prefHeight="500" prefWidth="1200" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="mvc.controller.MainController">
     <columnConstraints>
         <ColumnConstraints hgrow="NEVER"/>
@@ -69,7 +69,7 @@
         </VBox>
     </VBox>
     <VBox GridPane.columnIndex="1">
-        <Label text="График функции" styleClass="title-label"/>
+        <Label text="График функции: y = x^2 + 7x - 3" styleClass="title-label"/>
         <LineChart fx:id="chart" animated="false">
             <xAxis>
                 <NumberAxis side="BOTTOM"/>

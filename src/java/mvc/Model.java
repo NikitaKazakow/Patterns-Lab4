@@ -22,7 +22,7 @@ public class Model {
     }
 
     private double mathFunction(double x) {
-        return Math.pow(x, 2);
+        return Math.pow(x, 2) + 7 * x - 3;
     }
 
     //region Data manipulation methods

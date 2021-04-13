@@ -121,7 +121,7 @@ public class MainController implements Initializable {
                     editButton.setDisable(false);
                 }
                 catch (NumberFormatException ex) {
-                    addModalButton.setDisable(true);
+                    editButton.setDisable(true);
                 }
             }
             else {
